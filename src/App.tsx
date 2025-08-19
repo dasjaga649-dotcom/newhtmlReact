@@ -241,12 +241,12 @@ function App() {
               />
             </div>
             <nav className="nav-menu">
-              <a href="#home" className="nav-link active">Home</a>
-              <a href="#features" className="nav-link">Features</a>
-              <a href="#services" className="nav-link">Services</a>
-              <a href="#about" className="nav-link">About</a>
-              <a href="#contact" className="nav-link">Contact</a>
-              <button className="chat-button">💬 Chat</button>
+              <button className="nav-button active">Home</button>
+              <button className="nav-button">Features</button>
+              <button className="nav-button">Services</button>
+              <button className="nav-button">About</button>
+              <button className="nav-button">Contact</button>
+              <button className="nav-button chat-nav-button">💬 Chat</button>
             </nav>
           </div>
         </header>
