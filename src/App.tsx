@@ -40,50 +40,44 @@ function App() {
       let response: Response | null = null;
       let requestData;
 
-      // Try different common request formats
-      const requestFormats = [
-        // Format 1: { question: "..." }
-        { question: inputValue },
-        // Format 2: { query: "..." }
-        { query: inputValue },
-        // Format 3: { message: "..." }
-        { message: inputValue },
-        // Format 4: Just the string
-        inputValue
-      ];
+      // Use the correct format that backend expects
+      requestData = { query: inputValue };
+      console.log('Sending request:', requestData);
 
-      for (let i = 0; i < requestFormats.length; i++) {
-        requestData = requestFormats[i];
-        console.log(`Attempt ${i + 1}: Sending request:`, requestData);
+      response = await fetch('http://localhost:3001/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
 
-        response = await fetch('http://localhost:3001/query', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestData),
-        });
+      console.log('Response status:', response.status);
 
-        console.log('Response status:', response.status);
-
-        if (response.ok) {
-          console.log('✅ Request successful with format:', requestData);
-          break;
-        } else if (i === requestFormats.length - 1) {
-          // Last attempt failed, get error details
-          const errorText = await response.text();
-          console.error('All request formats failed. Last error:', errorText);
-          throw new Error(`HTTP error! status: ${response.status}. Response: ${errorText}`);
-        } else {
-          console.log(`❌ Format ${i + 1} failed, trying next...`);
-        }
-      }
-
-      if (!response) {
-        throw new Error('No response received from server');
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Request failed. Error:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}. Response: ${errorText}`);
       }
 
       const data = await response.text();
+      console.log('Raw response:', data);
+
+      // Parse JSON response and extract the actual answer
+      let actualAnswer;
+      try {
+        const jsonResponse = JSON.parse(data);
+        if (jsonResponse.response && jsonResponse.response.answer) {
+          actualAnswer = jsonResponse.response.answer;
+        } else if (jsonResponse.answer) {
+          actualAnswer = jsonResponse.answer;
+        } else {
+          actualAnswer = data; // fallback to raw response
+        }
+      } catch (parseError) {
+        console.log('Response is not JSON, using as-is');
+        actualAnswer = data;
+      }
       
       const botMessage: Message = {
         id: Date.now() + 1,
