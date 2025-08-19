@@ -350,7 +350,7 @@ function App() {
             <button
               type="submit"
               disabled={isLoading || !inputValue.trim()}
-              className="absolute right-14 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:transform-none">
+              className="absolute right-12 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:transform-none">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2"
                 stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round"
@@ -363,7 +363,7 @@ function App() {
               <button
                 type="button"
                 onClick={() => setShowMenu(!showMenu)}
-                className="text-gray-500 hover:text-blue-600 p-2.5 rounded-full hover:bg-blue-50 transition-all duration-200 border border-gray-200 hover:border-blue-300"
+                className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition-all duration-200"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
