@@ -177,7 +177,7 @@ const UserMessage: React.FC<{ text: string }> = ({ text }) => {
   return (
     <div className="flex justify-end">
       <div className="rounded-xl rounded-br-none p-4 shadow-md chat-bubble-user prose text-sm max-w-lg">
-        <div dangerouslySetInnerHTML={{ __html: marked.parse(text) }} />
+        <div dangerouslySetInnerHTML={{ __html: marked(text) }} />
       </div>
     </div>
   );
