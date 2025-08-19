@@ -201,8 +201,8 @@ const BotMessage: React.FC<{
         {/* Main Answer */}
         {message.text && (
           <div className="p-4 rounded-xl prose text-gray-800">
-            <div dangerouslySetInnerHTML={{ 
-              __html: marked.parse(renderIcons(renderTables(preprocessResponse(message.text), response?.tables || [])))
+            <div dangerouslySetInnerHTML={{
+              __html: marked(renderIcons(renderTables(preprocessResponse(message.text), response?.tables || [])))
             }} />
           </div>
         )}
