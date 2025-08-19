@@ -81,7 +81,7 @@ function App() {
       
       const botMessage: Message = {
         id: Date.now() + 1,
-        text: data,
+        text: actualAnswer,
         isUser: false,
         timestamp: new Date()
       };
