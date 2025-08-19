@@ -220,8 +220,360 @@
           transform: translateX(2px);
         }
 
+        /* CLIENT PAGE STYLES */
+        .client-page {
+          min-height: 100vh;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          font-family: 'Inter', sans-serif;
+        }
+
+        .client-header {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 1rem 0;
+          position: sticky;
+          top: 0;
+          z-index: 50;
+        }
+
+        .header-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 2rem;
+        }
+
+        .logo-section {
+          display: flex;
+          align-items: center;
+        }
+
+        .logo {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .logo-text {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #2563eb;
+          line-height: 1;
+        }
+
+        .logo-subtext {
+          font-size: 0.75rem;
+          color: #6b7280;
+          font-weight: 500;
+          letter-spacing: 0.1em;
+        }
+
+        .nav-menu {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        .nav-link {
+          color: #4b5563;
+          text-decoration: none;
+          font-weight: 500;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+          color: #2563eb;
+          background-color: #eff6ff;
+        }
+
+        .chat-button {
+          background: #2563eb;
+          color: white;
+          border: none;
+          padding: 0.75rem 1.5rem;
+          border-radius: 0.75rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .chat-button:hover {
+          background: #1d4ed8;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .client-main {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 4rem 2rem;
+          text-align: center;
+        }
+
+        .welcome-section {
+          margin-bottom: 4rem;
+        }
+
+        .welcome-title {
+          font-size: 3rem;
+          font-weight: 700;
+          color: white;
+          margin-bottom: 1rem;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .ai-text {
+          background: linear-gradient(45deg, #06b6d4, #3b82f6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .welcome-subtitle {
+          font-size: 1.25rem;
+          color: rgba(255, 255, 255, 0.9);
+          margin-bottom: 0;
+        }
+
+        .question-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 1.5rem;
+          margin-bottom: 4rem;
+        }
+
+        .question-card {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 1rem;
+          padding: 1.5rem;
+          cursor: pointer;
+          transition: all 0.3s ease-in-out;
+          text-align: left;
+          display: flex;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .question-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+          background: rgba(255, 255, 255, 1);
+        }
+
+        .card-icon {
+          font-size: 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 3rem;
+          height: 3rem;
+          background: #f0f9ff;
+          border-radius: 0.75rem;
+          flex-shrink: 0;
+        }
+
+        .card-content {
+          flex: 1;
+        }
+
+        .card-title {
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: #1f2937;
+          margin: 0 0 0.5rem 0;
+        }
+
+        .card-description {
+          font-size: 0.875rem;
+          color: #6b7280;
+          margin: 0;
+          line-height: 1.5;
+        }
+
+        .client-search-container {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .client-search-form {
+          width: 100%;
+          max-width: 600px;
+        }
+
+        .search-input-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+
+        .client-search-input {
+          width: 100%;
+          padding: 1rem 4rem 1rem 1.5rem;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          border-radius: 2rem;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          font-size: 1rem;
+          color: #1f2937;
+          transition: all 0.3s ease-in-out;
+          outline: none;
+        }
+
+        .client-search-input:focus {
+          border-color: #2563eb;
+          box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .client-search-input::placeholder {
+          color: #9ca3af;
+        }
+
+        .client-search-input.searching {
+          background: #f3f4f6;
+          cursor: not-allowed;
+        }
+
+        .search-send-button {
+          position: absolute;
+          right: 0.5rem;
+          top: 50%;
+          transform: translateY(-50%);
+          background: #2563eb;
+          color: white;
+          border: none;
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .search-send-button:hover:not(:disabled) {
+          background: #1d4ed8;
+          transform: translateY(-50%) scale(1.1);
+        }
+
+        .search-send-button:disabled {
+          background: #9ca3af;
+          cursor: not-allowed;
+          transform: translateY(-50%);
+        }
+
+        .search-send-button.searching {
+          background: #6b7280;
+        }
+
+        .searching-animation {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+        }
+
+        .searching-animation .dot {
+          width: 4px;
+          height: 4px;
+          background: white;
+          border-radius: 50%;
+          animation: searchingDots 1.4s infinite ease-in-out;
+        }
+
+        .searching-animation .dot:nth-child(1) {
+          animation-delay: -0.32s;
+        }
+
+        .searching-animation .dot:nth-child(2) {
+          animation-delay: -0.16s;
+        }
+
+        @keyframes searchingDots {
+          0%, 80%, 100% {
+            transform: scale(0);
+            opacity: 0.5;
+          }
+          40% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        .back-button-container {
+          padding: 1rem 2rem;
+          background: rgba(255, 255, 255, 0.95);
+          border-bottom: 1px solid #e5e7eb;
+        }
+
+        .back-button {
+          background: #f3f4f6;
+          border: 1px solid #d1d5db;
+          color: #374151;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          cursor: pointer;
+          font-weight: 500;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .back-button:hover {
+          background: #e5e7eb;
+          color: #1f2937;
+        }
+
         /* Responsive improvements */
         @media (max-width: 768px) {
+          .header-content {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0 1rem;
+          }
+
+          .nav-menu {
+            gap: 1rem;
+          }
+
+          .nav-link {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+          }
+
+          .welcome-title {
+            font-size: 2rem;
+          }
+
+          .welcome-subtitle {
+            font-size: 1rem;
+          }
+
+          .client-main {
+            padding: 2rem 1rem;
+          }
+
+          .question-cards-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+
+          .question-card {
+            padding: 1rem;
+          }
+
+          .card-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 1.5rem;
+          }
+
           .chat-history {
             padding-top: 1rem;
             gap: 1.5rem;
