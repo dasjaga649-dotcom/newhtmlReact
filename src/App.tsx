@@ -38,6 +38,9 @@ function App() {
     setIsLoading(true);
 
     try {
+      // Log the request for debugging
+      console.log('Sending request to backend:', { question: inputValue });
+
       const response = await fetch('http://localhost:3001/query', {
         method: 'POST',
         headers: {
@@ -46,8 +49,14 @@ function App() {
         body: JSON.stringify({ question: inputValue }),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // Try to get error details from the response
+        const errorText = await response.text();
+        console.error('Error response body:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}. Response: ${errorText}`);
       }
 
       const data = await response.text();
