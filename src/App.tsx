@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { marked } from 'marked';
 import './App.css';
 
+// Configure marked to return strings synchronously
+marked.setOptions({
+  async: false
+});
+
 interface Message {
   id: number;
   text: string;
