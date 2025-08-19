@@ -37,7 +37,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      let response;
+      let response: Response | null = null;
       let requestData;
 
       // Try different common request formats
@@ -77,6 +77,10 @@ function App() {
         } else {
           console.log(`❌ Format ${i + 1} failed, trying next...`);
         }
+      }
+
+      if (!response) {
+        throw new Error('No response received from server');
       }
 
       const data = await response.text();
