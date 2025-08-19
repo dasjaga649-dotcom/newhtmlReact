@@ -319,16 +319,6 @@ function App() {
   // Chat Page
   return (
     <div className="bg-white body" id='body'>
-      {/* Back to Client Button */}
-      <div className="back-button-container">
-        <button 
-          onClick={() => setCurrentPage('client')}
-          className="back-button"
-        >
-          ← Back to Home
-        </button>
-      </div>
-
       {/* Chat History Panel */}
       <div id="chat-history" className="chat-history mx-auto max-w-3xl w-full px-4 md:px-0">
         {messages.map((message) => (
