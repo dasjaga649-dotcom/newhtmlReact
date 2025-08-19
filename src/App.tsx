@@ -60,6 +60,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState<'client' | 'chat'>('client');
   const [isSearching, setIsSearching] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const questionCards: QuestionCard[] = [
     {
@@ -203,6 +204,24 @@ function App() {
     sendMessage();
   };
 
+  const clearChat = () => {
+    setMessages([
+      {
+        id: 1,
+        text: "Hello! I am your AI assistant. How can I help you today?",
+        isUser: false,
+        timestamp: new Date()
+      }
+    ]);
+    setShowMenu(false);
+  };
+
+  const newChat = () => {
+    setCurrentPage('client');
+    setInputValue('');
+    setShowMenu(false);
+  };
+
   if (currentPage === 'client') {
     return (
       <div className="client-page">
@@ -210,10 +229,16 @@ function App() {
         <header className="client-header">
           <div className="header-content">
             <div className="logo-section">
-              <div className="logo">
-                <span className="logo-text">Hutech</span>
-                <span className="logo-subtext">SOLUTIONS</span>
-              </div>
+              <img 
+                src="https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg" 
+                alt="Hutech Solutions" 
+                className="hutech-logo"
+              />
+              <img 
+                src="https://hutechsolutions.com/wp-content/uploads/2024/08/cmmi-level3-logo.svg" 
+                alt="CMMI Level 3" 
+                className="cmmi-logo"
+              />
             </div>
             <nav className="nav-menu">
               <a href="#home" className="nav-link active">Home</a>
@@ -319,7 +344,7 @@ function App() {
         {isLoading && <LoadingMessage />}
       </div>
 
-      {/* Chat Input Form */}
+      {/* Chat Input Form with Menu */}
       <div className="sticky bottom-0 bg-white py-4">
         <form id="chat-form" className="flex items-center gap-4 mx-auto max-w-3xl w-full px-4 md:px-0" onSubmit={handleFormSubmit}>
           <div className="flex-1 relative">
@@ -330,18 +355,48 @@ function App() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               disabled={isLoading}
-              className="w-full p-4 pr-16 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-200 disabled:opacity-50" 
+              className="w-full p-4 pr-20 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-200 disabled:opacity-50" 
             />
             <button 
               type="submit"
               disabled={isLoading || !inputValue.trim()}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-700 hover:bg-gray-800 text-white p-2 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:transform-none">
+              className="absolute right-12 top-1/2 -translate-y-1/2 bg-gray-700 hover:bg-gray-800 text-white p-2 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:transform-none">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2"
                 stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round"
                   d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
               </svg>
             </button>
+            
+            {/* Three Dots Menu */}
+            <div className="absolute right-2 top-1/2 -translate-y-1/2">
+              <button
+                type="button"
+                onClick={() => setShowMenu(!showMenu)}
+                className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition-all duration-200"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                </svg>
+              </button>
+              
+              {showMenu && (
+                <div className="absolute bottom-full right-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg py-1 min-w-32">
+                  <button
+                    onClick={newChat}
+                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                  >
+                    New Chat
+                  </button>
+                  <button
+                    onClick={clearChat}
+                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                  >
+                    Clear Chat
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </form>
       </div>
