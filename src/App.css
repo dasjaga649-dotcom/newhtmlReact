@@ -579,6 +579,34 @@
           color: #0891b2;
         }
 
+        /* Chat Menu Wrapper */
+        .chat-menu-wrapper {
+          position: absolute;
+          right: -3rem;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .chat-menu-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 2.5rem;
+          height: 2.5rem;
+          background: white;
+          border: 1px solid #e5e7eb;
+          border-radius: 50%;
+          color: #6b7280;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .chat-menu-button:hover {
+          color: #374151;
+          border-color: #d1d5db;
+          background: #f9fafb;
+        }
+
         /* Responsive improvements */
         @media (max-width: 1024px) {
           .question-cards-grid {
