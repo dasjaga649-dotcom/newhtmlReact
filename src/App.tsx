@@ -38,25 +38,46 @@ function App() {
     setIsLoading(true);
 
     try {
-      // Log the request for debugging
-      console.log('Sending request to backend:', { question: inputValue });
+      let response;
+      let requestData;
 
-      const response = await fetch('http://localhost:3001/query', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ question: inputValue }),
-      });
+      // Try different common request formats
+      const requestFormats = [
+        // Format 1: { question: "..." }
+        { question: inputValue },
+        // Format 2: { query: "..." }
+        { query: inputValue },
+        // Format 3: { message: "..." }
+        { message: inputValue },
+        // Format 4: Just the string
+        inputValue
+      ];
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+      for (let i = 0; i < requestFormats.length; i++) {
+        requestData = requestFormats[i];
+        console.log(`Attempt ${i + 1}: Sending request:`, requestData);
 
-      if (!response.ok) {
-        // Try to get error details from the response
-        const errorText = await response.text();
-        console.error('Error response body:', errorText);
-        throw new Error(`HTTP error! status: ${response.status}. Response: ${errorText}`);
+        response = await fetch('http://localhost:3001/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData),
+        });
+
+        console.log('Response status:', response.status);
+
+        if (response.ok) {
+          console.log('✅ Request successful with format:', requestData);
+          break;
+        } else if (i === requestFormats.length - 1) {
+          // Last attempt failed, get error details
+          const errorText = await response.text();
+          console.error('All request formats failed. Last error:', errorText);
+          throw new Error(`HTTP error! status: ${response.status}. Response: ${errorText}`);
+        } else {
+          console.log(`❌ Format ${i + 1} failed, trying next...`);
+        }
       }
 
       const data = await response.text();
