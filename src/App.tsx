@@ -40,6 +40,13 @@ interface Table {
   rows: string[][];
 }
 
+interface QuestionCard {
+  icon: string;
+  title: string;
+  description: string;
+  category: string;
+}
+
 function App() {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -51,21 +58,81 @@ function App() {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState<'client' | 'chat'>('client');
+  const [isSearching, setIsSearching] = useState(false);
 
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const questionCards: QuestionCard[] = [
+    {
+      icon: '👤',
+      title: 'Founder/CEO',
+      description: 'Who is the founder/who is the CEO?',
+      category: 'About'
+    },
+    {
+      icon: '🏢',
+      title: 'Offices',
+      description: 'Where are our offices?',
+      category: 'Location'
+    },
+    {
+      icon: '⚙️',
+      title: 'Services',
+      description: 'What services do we provide?',
+      category: 'Services'
+    },
+    {
+      icon: '🏭',
+      title: 'Industries',
+      description: 'What industries do we serve?',
+      category: 'Industries'
+    },
+    {
+      icon: '📊',
+      title: 'Stats',
+      description: 'What are some impressive stats about Hutech?',
+      category: 'Statistics'
+    },
+    {
+      icon: '🏆',
+      title: 'Certifications',
+      description: 'What certifications do we have?',
+      category: 'Qualifications'
+    },
+    {
+      icon: '💻',
+      title: 'Tech Stack',
+      description: 'What is our tech stack?',
+      category: 'Technology'
+    },
+    {
+      icon: '📞',
+      title: 'Contact',
+      description: 'Give me your contact details.',
+      category: 'Contact'
+    }
+  ];
+
+  const sendMessage = async (query?: string) => {
+    const messageText = query || inputValue.trim();
+    if (!messageText) return;
+
+    // Add searching animation
+    setIsSearching(true);
     
-    if (!inputValue.trim()) return;
+    // Navigate to chat page
+    setTimeout(() => {
+      setCurrentPage('chat');
+      setIsSearching(false);
+    }, 800);
 
     const userMessage: Message = {
       id: Date.now(),
-      text: inputValue,
+      text: messageText,
       isUser: true,
       timestamp: new Date()
     };
 
     setMessages(prev => [...prev, userMessage]);
-    const currentInput = inputValue;
     setInputValue('');
     setIsLoading(true);
 
@@ -75,7 +142,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query: currentInput }),
+        body: JSON.stringify({ query: messageText }),
       });
 
       if (!response.ok) {
@@ -122,17 +189,121 @@ function App() {
 
   const handleSuggestionClick = (suggestion: string) => {
     setInputValue(suggestion);
-    // Auto-submit the suggestion
     setTimeout(() => {
-      const form = document.getElementById('chat-form') as HTMLFormElement;
-      if (form) {
-        form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-      }
+      sendMessage(suggestion);
     }, 100);
   };
 
+  const handleCardClick = (card: QuestionCard) => {
+    sendMessage(card.description);
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendMessage();
+  };
+
+  if (currentPage === 'client') {
+    return (
+      <div className="client-page">
+        {/* Header */}
+        <header className="client-header">
+          <div className="header-content">
+            <div className="logo-section">
+              <div className="logo">
+                <span className="logo-text">Hutech</span>
+                <span className="logo-subtext">SOLUTIONS</span>
+              </div>
+            </div>
+            <nav className="nav-menu">
+              <a href="#home" className="nav-link active">Home</a>
+              <a href="#features" className="nav-link">Features</a>
+              <a href="#services" className="nav-link">Services</a>
+              <a href="#about" className="nav-link">About</a>
+              <a href="#contact" className="nav-link">Contact</a>
+              <button className="chat-button">💬 Chat</button>
+            </nav>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <main className="client-main">
+          <div className="welcome-section">
+            <h1 className="welcome-title">
+              Hello, this is an <span className="ai-text">AI assistant</span>!
+            </h1>
+            <p className="welcome-subtitle">
+              I will help you find answers to your questions. Here are some examples:
+            </p>
+          </div>
+
+          {/* Question Cards */}
+          <div className="question-cards-grid">
+            {questionCards.map((card, index) => (
+              <div 
+                key={index}
+                className="question-card"
+                onClick={() => handleCardClick(card)}
+              >
+                <div className="card-icon">{card.icon}</div>
+                <div className="card-content">
+                  <h3 className="card-title">{card.title}</h3>
+                  <p className="card-description">{card.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Search Bar */}
+          <div className="client-search-container">
+            <form onSubmit={handleFormSubmit} className="client-search-form">
+              <div className="search-input-wrapper">
+                <input
+                  type="text"
+                  placeholder="🎤 Ask me anything..."
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  className={`client-search-input ${isSearching ? 'searching' : ''}`}
+                  disabled={isSearching}
+                />
+                <button
+                  type="submit"
+                  className={`search-send-button ${isSearching ? 'searching' : ''}`}
+                  disabled={isSearching || !inputValue.trim()}
+                >
+                  {isSearching ? (
+                    <div className="searching-animation">
+                      <div className="dot"></div>
+                      <div className="dot"></div>
+                      <div className="dot"></div>
+                    </div>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // Chat Page
   return (
     <div className="bg-white body" id='body'>
+      {/* Back to Client Button */}
+      <div className="back-button-container">
+        <button 
+          onClick={() => setCurrentPage('client')}
+          className="back-button"
+        >
+          ← Back to Home
+        </button>
+      </div>
+
       {/* Chat History Panel */}
       <div id="chat-history" className="chat-history mx-auto max-w-3xl w-full px-4 md:px-0">
         {messages.map((message) => (
@@ -150,7 +321,7 @@ function App() {
 
       {/* Chat Input Form */}
       <div className="sticky bottom-0 bg-white py-4">
-        <form id="chat-form" className="flex items-center gap-4 mx-auto max-w-3xl w-full px-4 md:px-0" onSubmit={sendMessage}>
+        <form id="chat-form" className="flex items-center gap-4 mx-auto max-w-3xl w-full px-4 md:px-0" onSubmit={handleFormSubmit}>
           <div className="flex-1 relative">
             <input 
               id="user-input" 
@@ -206,7 +377,7 @@ const BotMessage: React.FC<{
         {/* Main Answer */}
         {message.text && (
           <div className="p-4 rounded-xl prose text-gray-800">
-            <div dangerouslySetInnerHTML={{
+            <div dangerouslySetInnerHTML={{ 
               __html: marked(renderIcons(renderTables(preprocessResponse(message.text), response?.tables || []))) as string
             }} />
           </div>
