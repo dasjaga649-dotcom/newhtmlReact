@@ -108,7 +108,7 @@ function App() {
       category: 'Statistics'
     },
     {
-      icon: '����',
+      icon: '🏆',
       title: 'Certifications',
       description: 'What certifications do we have?',
       category: 'Qualifications'
@@ -276,23 +276,6 @@ function App() {
             </p>
           </div>
 
-          {/* Question Cards */}
-          <div className="question-cards-grid">
-            {questionCards.map((card, index) => (
-              <div 
-                key={index}
-                className="question-card"
-                onClick={() => handleCardClick(card)}
-              >
-                <div className="card-icon">{card.icon}</div>
-                <div className="card-content">
-                  <h3 className="card-title">{card.title}</h3>
-                  <p className="card-description">{card.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
           {/* Search Bar */}
           <div className="client-search-container">
             <form onSubmit={handleFormSubmit} className="client-search-form">
@@ -324,6 +307,25 @@ function App() {
                 </button>
               </div>
             </form>
+          </div>
+
+          {/* Question Cards - Horizontal Scroll */}
+          <div className="question-cards-container">
+            <div className="question-cards-scroll">
+              {questionCards.map((card, index) => (
+                <div
+                  key={index}
+                  className="question-card-horizontal"
+                  onClick={() => handleCardClick(card)}
+                >
+                  <div className="card-icon">{card.icon}</div>
+                  <div className="card-content">
+                    <h3 className="card-title">{card.title}</h3>
+                    <p className="card-description">{card.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </main>
       </div>
