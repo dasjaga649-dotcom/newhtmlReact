@@ -197,9 +197,6 @@ function App() {
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
-
-      // Start typing effect for error message
-      startTypingEffect(errorMessage.id, errorMessage.text);
     } finally {
       setIsLoading(false);
     }
