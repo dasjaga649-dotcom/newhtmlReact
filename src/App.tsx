@@ -108,7 +108,7 @@ function App() {
       category: 'Statistics'
     },
     {
-      icon: '🏆',
+      icon: '����',
       title: 'Certifications',
       description: 'What certifications do we have?',
       category: 'Qualifications'
@@ -452,12 +452,11 @@ const BotMessage: React.FC<{
         )}
 
         {/* Main Answer */}
-        {textToShow && (
+        {message.text && (
           <div className="p-4 rounded-xl prose text-gray-800">
             <div dangerouslySetInnerHTML={{
-              __html: marked(renderIcons(renderTables(preprocessResponse(textToShow), response?.tables || []))) as string
+              __html: marked(renderIcons(renderTables(preprocessResponse(message.text), response?.tables || []))) as string
             }} />
-            {isTyping && <span className="typing-cursor">|</span>}
           </div>
         )}
 
