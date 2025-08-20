@@ -212,6 +212,9 @@ function App() {
       };
 
       setMessages(prev => [...prev, botMessage]);
+
+      // Start typing effect for bot response
+      startTypingEffect(botMessage.id, botMessage.text);
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage: Message = {
