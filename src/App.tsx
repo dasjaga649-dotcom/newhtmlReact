@@ -364,7 +364,7 @@ function App() {
   return (
     <div className="bg-white body" id='body'>
       {/* Chat History Panel */}
-      <div id="chat-history" className="chat-history mx-auto max-w-3xl w-full px-4 md:px-0">
+      <div id="chat-history" className="chat-history-container">
         {messages.map((message) => (
           <div key={message.id}>
             {message.isUser ? (
