@@ -370,7 +370,12 @@ function App() {
             {message.isUser ? (
               <UserMessage text={message.text} />
             ) : (
-              <BotMessage message={message} onSuggestionClick={handleSuggestionClick} />
+              <BotMessage
+                message={message}
+                onSuggestionClick={handleSuggestionClick}
+                displayedText={displayedText[message.id]}
+                isTyping={typingMessageId === message.id}
+              />
             )}
           </div>
         ))}
@@ -386,7 +391,7 @@ function App() {
               <input
                 id="user-input"
                 type="text"
-                placeholder="�� Ask me anything..."
+                placeholder="🎤 Ask me anything..."
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 disabled={isLoading}
