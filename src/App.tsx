@@ -240,19 +240,19 @@ function App() {
 
   if (currentPage === 'client') {
     return (
-      <div className="client-page">
+      <div className={`client-page ${pageTransitioning ? 'page-transition-exit-active' : ''}`}>
         {/* Header */}
         <header className="client-header">
           <div className="header-content">
             <div className="logo-section">
-              <img 
-                src="https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg" 
-                alt="Hutech Solutions" 
+              <img
+                src="https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+                alt="Hutech Solutions"
                 className="hutech-logo"
               />
-              <img 
-                src="https://hutechsolutions.com/wp-content/uploads/2024/08/cmmi-level3-logo.svg" 
-                alt="CMMI Level 3" 
+              <img
+                src="https://hutechsolutions.com/wp-content/uploads/2024/08/cmmi-level3-logo.svg"
+                alt="CMMI Level 3"
                 className="cmmi-logo"
               />
             </div>
@@ -287,25 +287,17 @@ function App() {
                   placeholder="🎤 Ask me anything..."
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  className={`client-search-input ${isSearching ? 'searching' : ''} ${searchAnimating ? 'search-animate' : ''}`}
-                  disabled={isSearching}
+                  className="client-search-input"
+                  disabled={pageTransitioning}
                 />
                 <button
                   type="submit"
-                  className={`search-send-button ${isSearching ? 'searching' : ''}`}
-                  disabled={isSearching || !inputValue.trim()}
+                  className="search-send-button"
+                  disabled={pageTransitioning || !inputValue.trim()}
                 >
-                  {isSearching ? (
-                    <div className="searching-animation">
-                      <div className="dot"></div>
-                      <div className="dot"></div>
-                      <div className="dot"></div>
-                    </div>
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 713.27 20.876L5.999 12zm0 0h7.5" />
-                    </svg>
-                  )}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 713.27 20.876L5.999 12zm0 0h7.5" />
+                  </svg>
                 </button>
               </div>
             </form>
@@ -317,8 +309,8 @@ function App() {
               {questionCards.map((card, index) => (
                 <div
                   key={index}
-                  className={`question-card-horizontal ${animatingCard === index ? 'question-card-animate' : ''}`}
-                  onClick={() => handleCardClick(card, index)}
+                  className="question-card-horizontal"
+                  onClick={() => handleCardClick(card)}
                 >
                   <div className="card-icon">{card.icon}</div>
                   <div className="card-content">
