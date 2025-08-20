@@ -340,12 +340,7 @@ function App() {
             {message.isUser ? (
               <UserMessage text={message.text} />
             ) : (
-              <BotMessage
-                message={message}
-                onSuggestionClick={handleSuggestionClick}
-                displayedText={displayedText[message.id]}
-                isTyping={typingMessageId === message.id}
-              />
+              <BotMessage message={message} onSuggestionClick={handleSuggestionClick} />
             )}
           </div>
         ))}
