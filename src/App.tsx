@@ -76,7 +76,29 @@ function App() {
       // Small delay to ensure DOM is updated
       setTimeout(scrollToBottom, 100);
     }
-  }, [messages, currentPage]);
+  }, [messages, currentPage, displayedText]);
+
+  // Typing effect for bot messages
+  const startTypingEffect = (messageId: number, fullText: string) => {
+    setTypingMessageId(messageId);
+    setDisplayedText(prev => ({ ...prev, [messageId]: '' }));
+
+    const words = fullText.split(' ');
+    let currentWordIndex = 0;
+
+    const typeInterval = setInterval(() => {
+      if (currentWordIndex < words.length) {
+        setDisplayedText(prev => ({
+          ...prev,
+          [messageId]: words.slice(0, currentWordIndex + 1).join(' ') + (currentWordIndex < words.length - 1 ? ' ' : '')
+        }));
+        currentWordIndex++;
+      } else {
+        setTypingMessageId(null);
+        clearInterval(typeInterval);
+      }
+    }, 200); // Adjust speed here (200ms per word)
+  };
 
   const questionCards: QuestionCard[] = [
     {
