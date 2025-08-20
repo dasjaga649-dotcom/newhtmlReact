@@ -593,9 +593,8 @@
           justify-content: center;
           width: 2.5rem;
           height: 2.5rem;
-          background: white;
-          border: 1px solid #e5e7eb;
-          border-radius: 50%;
+          background: none;
+          border: none;
           color: #6b7280;
           cursor: pointer;
           transition: all 0.2s ease-in-out;
@@ -603,8 +602,6 @@
 
         .chat-menu-button:hover {
           color: #374151;
-          border-color: #d1d5db;
-          background: #f9fafb;
         }
 
         /* Responsive improvements */
