@@ -350,8 +350,10 @@
 
         /* Horizontal Question Cards */
         .question-cards-container {
-          margin-top: 2rem;
+          margin-top: 1rem;
           width: 100%;
+          display: flex;
+          justify-content: center;
         }
 
         .question-cards-scroll {
@@ -361,6 +363,9 @@
           padding: 1rem 0;
           scroll-behavior: smooth;
           scrollbar-width: thin;
+          width: 50%;
+          max-width: 600px;
+          min-width: 400px;
         }
 
         .question-cards-scroll::-webkit-scrollbar {
