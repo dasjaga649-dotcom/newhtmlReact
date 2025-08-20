@@ -756,9 +756,13 @@
 
         /* Responsive improvements */
         @media (max-width: 1024px) {
-          .question-cards-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.625rem;
+          .question-card-horizontal {
+            min-width: 250px;
+          }
+
+          .client-search-form {
+            width: 70%;
+            min-width: 350px;
           }
 
           .chat-search-form {
