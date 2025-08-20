@@ -62,6 +62,20 @@ function App() {
   const [isSearching, setIsSearching] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
+  // Auto-scroll to bottom when new messages are added
+  useEffect(() => {
+    if (currentPage === 'chat') {
+      const scrollToBottom = () => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+      };
+      // Small delay to ensure DOM is updated
+      setTimeout(scrollToBottom, 100);
+    }
+  }, [messages, currentPage]);
+
   const questionCards: QuestionCard[] = [
     {
       icon: '👤',
