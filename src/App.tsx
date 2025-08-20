@@ -211,12 +211,8 @@ function App() {
     }, 100);
   };
 
-  const handleCardClick = (card: QuestionCard, index: number) => {
-    setAnimatingCard(index);
-    setTimeout(() => {
-      sendMessage(card.description);
-      setAnimatingCard(null);
-    }, 400);
+  const handleCardClick = (card: QuestionCard) => {
+    sendMessage(card.description);
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
