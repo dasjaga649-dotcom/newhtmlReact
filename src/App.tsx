@@ -328,7 +328,7 @@ function App() {
 
   // Chat Page
   return (
-    <div className="bg-white body" id='body'>
+    <div className={`bg-white body page-transition-enter-active ${isSearching ? 'chat-searching' : ''}`} id='body'>
       {/* Chat History Panel */}
       <div id="chat-history" className="chat-history-container">
         {messages.map((message) => (
