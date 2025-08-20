@@ -242,70 +242,66 @@
         }
 
         /* Page Transition Animations */
-        .page-transition-enter {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-
         .page-transition-enter-active {
-          opacity: 1;
-          transform: translateY(0);
-          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .page-transition-exit {
-          opacity: 1;
-          transform: translateY(0);
+          animation: slideInFromRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         .page-transition-exit-active {
-          opacity: 0;
-          transform: translateY(-20px);
-          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          animation: slideOutToLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        /* Question Card Animation */
-        .question-card-animate {
-          animation: questionToSearch 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes questionToSearch {
+        @keyframes slideInFromRight {
           0% {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-          }
-          50% {
-            transform: translateY(-50px) scale(0.95);
-            opacity: 0.7;
+            opacity: 0;
+            transform: translateX(100px);
           }
           100% {
-            transform: translateY(-100px) scale(0.9);
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slideOutToLeft {
+          0% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+          100% {
+            opacity: 0;
+            transform: translateX(-100px);
+          }
+        }
+
+        /* Chat Search Animation */
+        .chat-searching {
+          position: relative;
+        }
+
+        .chat-searching::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.1));
+          animation: searchPulse 2s ease-in-out infinite;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        @keyframes searchPulse {
+          0%, 100% {
             opacity: 0;
           }
-        }
-
-        /* Modern Search Animation */
-        .search-animate {
-          animation: modernSearch 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes modernSearch {
-          0% {
-            transform: scale(1);
-            box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
-          }
-          25% {
-            transform: scale(1.02);
-            box-shadow: 0 0 0 10px rgba(37, 99, 235, 0.2);
-          }
           50% {
-            transform: scale(1.01);
-            box-shadow: 0 0 0 20px rgba(37, 99, 235, 0.1);
+            opacity: 1;
           }
-          100% {
-            transform: scale(1);
-            box-shadow: 0 0 0 30px rgba(37, 99, 235, 0);
-          }
+        }
+
+        .chat-searching .chat-search-input {
+          box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+          border-color: #2563eb;
         }
 
         .client-header {
