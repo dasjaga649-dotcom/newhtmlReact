@@ -132,16 +132,15 @@ function App() {
     const messageText = query || inputValue.trim();
     if (!messageText) return;
 
-    // Add modern search animation
-    setSearchAnimating(true);
-    setIsSearching(true);
+    // Start page transition
+    setPageTransitioning(true);
 
     // Navigate to chat page with smooth transition
     setTimeout(() => {
       setCurrentPage('chat');
-      setSearchAnimating(false);
-      setIsSearching(false);
-    }, 1000);
+      setPageTransitioning(false);
+      setIsSearching(true);
+    }, 600);
 
     const userMessage: Message = {
       id: Date.now(),
