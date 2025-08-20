@@ -437,11 +437,13 @@
           display: flex;
           justify-content: center;
           width: 100%;
+          margin: 2rem 0;
         }
 
         .client-search-form {
-          width: 100%;
-          max-width: 500px;
+          width: 50%;
+          max-width: 600px;
+          min-width: 400px;
         }
 
         .search-input-wrapper {
