@@ -839,6 +839,11 @@
             min-width: 350px;
           }
 
+          .question-cards-scroll {
+            width: 70%;
+            min-width: 350px;
+          }
+
           .chat-search-form {
             width: 70%;
           }
