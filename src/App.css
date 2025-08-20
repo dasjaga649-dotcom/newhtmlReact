@@ -49,8 +49,9 @@
 
         /* Prose styles for markdown content */
         .prose {
-          line-height: 1.7;
-          /* Increased line spacing for readability */
+          line-height: 1.6;
+          font-size: 0.875rem;
+          /* Smaller text for chat */
         }
 
         .prose img {
