@@ -466,11 +466,14 @@ const UserMessage: React.FC<{ text: string }> = ({ text }) => {
   );
 };
 
-const BotMessage: React.FC<{ 
-  message: Message; 
+const BotMessage: React.FC<{
+  message: Message;
   onSuggestionClick: (suggestion: string) => void;
-}> = ({ message, onSuggestionClick }) => {
+  displayedText?: string;
+  isTyping?: boolean;
+}> = ({ message, onSuggestionClick, displayedText, isTyping }) => {
   const response = message.response;
+  const textToShow = displayedText || message.text;
 
   return (
     <div className="flex items-start justify-center">
