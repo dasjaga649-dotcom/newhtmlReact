@@ -348,32 +348,55 @@
           margin-bottom: 0;
         }
 
-        .question-cards-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 0.75rem;
-          margin-bottom: 1.5rem;
-          max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
+        /* Horizontal Question Cards */
+        .question-cards-container {
+          margin-top: 2rem;
+          width: 100%;
         }
 
-        .question-card {
+        .question-cards-scroll {
+          display: flex;
+          gap: 1rem;
+          overflow-x: auto;
+          padding: 1rem 0;
+          scroll-behavior: smooth;
+          scrollbar-width: thin;
+        }
+
+        .question-cards-scroll::-webkit-scrollbar {
+          height: 6px;
+        }
+
+        .question-cards-scroll::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 3px;
+        }
+
+        .question-cards-scroll::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 3px;
+        }
+
+        .question-cards-scroll::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
+
+        .question-card-horizontal {
           background: white;
           border: 1px solid #e5e7eb;
-          border-radius: 0.5rem;
-          padding: 0.75rem;
+          border-radius: 0.75rem;
+          padding: 1rem;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
           text-align: left;
           display: flex;
           align-items: flex-start;
-          gap: 0.5rem;
-          height: fit-content;
-          min-height: 75px;
+          gap: 0.75rem;
+          min-width: 280px;
+          flex-shrink: 0;
         }
 
-        .question-card:hover {
+        .question-card-horizontal:hover {
           transform: translateY(-2px);
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
           border-color: #d1d5db;
